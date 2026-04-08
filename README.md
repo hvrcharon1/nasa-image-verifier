@@ -92,4 +92,4 @@ MIT License — free to use, modify, and distribute.
 
 ---
 
-Built with ❤️ using Claude AI + NASA's open data
+
