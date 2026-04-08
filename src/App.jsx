@@ -54,10 +54,15 @@ function Starfield() {
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-const toBase64 = (file) =>
+// Returns both the raw base64 and the full data: URL (for reliable iframe preview)
+const readImage = (file) =>
   new Promise((res, rej) => {
     const r = new FileReader();
-    r.onload = () => res(r.result.split(",")[1]);
+    r.onload = () => {
+      const dataUrl = r.result;
+      const base64 = dataUrl.split(",")[1];
+      res({ dataUrl, base64 });
+    };
     r.onerror = rej;
     r.readAsDataURL(file);
   });
@@ -88,7 +93,10 @@ async function searchNASA(query) {
 async function callClaude(messages, systemPrompt) {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "anthropic-dangerous-direct-browser-access": "true",
+    },
     body: JSON.stringify({
       model: "claude-sonnet-4-20250514",
       max_tokens: 1000,
@@ -289,9 +297,8 @@ export default function NASAVerifier() {
 
   const handleFile = useCallback(async (file) => {
     if (!file || !file.type.startsWith("image/")) return;
-    const url = URL.createObjectURL(file);
-    const base64 = await toBase64(file);
-    setImage({ file, url, base64, type: file.type });
+    const { dataUrl, base64 } = await readImage(file);
+    setImage({ file, url: dataUrl, base64, type: file.type });
     setResult(null);
   }, []);
 
