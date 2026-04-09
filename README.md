@@ -6,6 +6,13 @@
 ![Free](https://img.shields.io/badge/Free-No%20Login%20Required-green?style=for-the-badge)
 ![Open Source](https://img.shields.io/badge/Open-Source-orange?style=for-the-badge)
 
+---
+
+> *The internet is an ocean of AI-generated imagery — breathtaking galaxies, stunning spacewalks, and awe-inspiring nebulae that never actually existed. Don't let synthetic visuals distort your understanding of real space exploration. NASA Image Verifier cuts through the noise, cross-referencing every upload against NASA's official archives so you always know what's real, what's fabricated, and what humanity has truly achieved among the stars.*
+
+---
+
+
 ## ✨ Features
 
 - 📸 **Upload any image** — drag & drop or click to browse
